@@ -17,11 +17,19 @@ import {
   getSubmissions,
   submit,
 } from "../controllers/SubmissionController.js";
+import { verify } from "../controllers/VerificationController.js";
+import { Login, Logout, refreshToken } from "../controllers/AuthController.js";
+import { verifyToken } from "../middleware/VerifyToken.js";
 
 const router = express.Router();
 
+//auth
+router.post("/login", upload, Login);
+router.get("/token", refreshToken);
+router.delete("/logout", Logout);
+
 //user & applicants
-router.get("/user", getUser);
+router.get("/user", verifyToken, getUser);
 router.post("/user", upload, createUser);
 
 //agenda & announcement & attendance
@@ -37,5 +45,8 @@ router.post("/announcement", upload, createAnnouncement);
 router.get("/submission", getSubmissions);
 router.post("/submission", upload, createSubmission);
 router.post("/submit/:id", upload, submit);
+
+//verification
+router.put("/verify/:id", upload, verify);
 
 export default router;

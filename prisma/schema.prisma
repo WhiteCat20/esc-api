@@ -16,7 +16,7 @@ model User {
   updatedAt        DateTime        @updatedAt
   name             String
   nrp              String          @unique
-  refresh_token    String?
+  refresh_token    String
   no_telp          String          @unique
   email            String          @unique
   password         String

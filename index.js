@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import bodyParser from "body-parser";
 import cors from "cors";
 import router from "./routes/route.js";
+import cookieParser from "cookie-parser";
 
 dotenv.config();
 
@@ -22,6 +23,9 @@ const checkApiKey = (req, res, next) => {
 
 // parse application/json
 app.use(bodyParser.json());
+
+//parse the cookie, so it can catch the cookie
+app.use(cookieParser());
 
 //accepting json request
 app.use(express.json());
